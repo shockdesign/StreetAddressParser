@@ -286,17 +286,16 @@ q{
         BAY         |
         DEPARTMENT  |
         FACTORY     |
-        FLAT        |
+        FLAT        | F |
         FRONT       |
         FRNT        |
         GATE        |
-        KEY         |
         HANGAR      | HNGR  |
         KEY         |
         LOBBY       |
         LBBY        |
         LOT         |
-        OFFICE      |
+        OFFICE      | OFF |
         OFC         |
         LOT         |
         NO          |
@@ -306,13 +305,14 @@ q{
         REAR (OF )? |
         ROOM        |
         RM          |
+        SITE        |
         SHOP        |
         SHED        |
-        SUITE       | STE |
+        SUITE       | STE | SE |
         TRAILER     |
         TRLR        |
-        UNIT        |
-        VILLA       |
+        UNIT        | U |
+        VILLA       | VLLA |
         \#                # Note '#' is a common abbreviation for number in USA
         )\ /x
 
@@ -404,14 +404,14 @@ q{
         street_name_single_word |
         street_noun |
         french_style |
-        /AVENUE OF \w+ \w+ /   # The Americas, Two Rivers etc
+        /(AVE|AVENUE) OF( \w+){1,2} / # The Americas, Two Rivers etc
         
     major_road :
         /([N|E|S|W] )?(COUNTY |STATE |US |FIRE )?(ALT|HIGHWAY|LANE|HWY|ROAD|RD|RTE|ROUTE) \d{1,3}\w? ([N|E|S|W|NORTH|EAST|SOUTH|WEST] )?/
 
     # Avenue C, 12 1/2 etc
     avenue_ordinal :
-        /([N|E|S|W] )?AVENUE ([A-Z]|\d{1,2}( 1\/2)?) /
+        /([N|E|S|W] )?(AVE|AVENUE) ([A-Z]|\d{1,2}( 1\/2)?) /
         
     # TO DO: N,E,S,W END suburb. End is valid street type but always with direction
 
@@ -545,6 +545,7 @@ q{
         # STREET_TYPE WORD STREET_TYPE
         # Glen Alpine Way, La Boheme Ave,  Grove Valley Ave, Green Bay Road
         /(
+        CENTRE|
         CIRCLE|
         CLUB|
         COURT|
@@ -665,7 +666,7 @@ q{
         RD|ROAD|
         LA|LN|LANE|
         AVE?|AVENUE|
-        ALY?|ALLEY|
+        ALY?|ALLY|ALLEY|
         ARC|ARCADE|
         BATTLEMENT|
         BROADWATER|
@@ -676,14 +677,18 @@ q{
         BR|BRAE|
         BROW|
         CASCADES|
+        CAUS|CAUSEWAY|
         CAY|
-        CENTRE|
-        CONCOURSE|
+        CN|CENTRAL|
+        CTR|CENTRE|
+        CNWY|CENTREWAY|
+        CON|CONCOURSE|
+        CNR|CORNER|
         CIR|CIRCLE|CRCLE|
-        CCT|CRT|CIR|CIRCUIT|
-        CHASE|
+        CCT|CRT|CIRi|CRCT|CIRCUIT|
+        CH|CHASE|
         CL|CLOSE|
-        CROSS|CROSSOVER|CROSSING|
+        CRSG|CRO?SS|CROSSOVER|CROSSING|
         CR?T|COURT|
         CV|COVE|
         CRES|CRS|CR|CRESCENT|
@@ -700,6 +705,7 @@ q{
         FAIRWAY|
         FW?Y|FREEWAY|
         GATE|
+        GR?DNS|GARDENS|
         GLADE|
         GRANGE|
         GLN|GLEN|
@@ -711,11 +717,14 @@ q{
         HWA?Y|HIGHWAY|
         HOLE|
         HOLLOW|
+        HTS|
         ISLE?|IS|  # Note that Island is a valid street type, but can get confused with suburb name, such as: Main St Clare Island. So don't include it
+        JUNC|JUNCTION|
         KEY|
         KNOLL|
         LANTERNS|
         LANDING|
+        LINK|
         LOOP|
         MEWS|
         MINNOW|
@@ -727,17 +736,17 @@ q{
         PATH|
         PDE|PARADE|
         PK|PARK|
-        PARKWAY|PKWY|
+        PWY|PARKWAY|PKWY|
         PENINSULA|
         PIERS|
         PIKE|
         PL|PLACE|
         PLZ|PLAZA|
         PORTICO|
-        PROMENADE|
+        PROM|PROMENADE|
         PT|POINTE?|
         RAMBLE|
-        RDG|RIDGE|
+        RDGE?|RIDGE|
         RETREAT|
         RIDE|RDE|
         RISE|RSE|
@@ -747,10 +756,13 @@ q{
         SLIP|
         SQ|SQUARE|
         TCE|TRCE|TER|TERRACE|
+        TOR|
         TRL|TRAIL|
         TPKE|TURNPIKE|
         TURN|
-        THROUGHWAY|       
+        THROUGHWAY|
+        VIEW|
+        VSTA|VISTA|
         WL?K|WALK|
         WY|WAY|WYNDE|
         WAYS  # such as in 'The Five Ways'

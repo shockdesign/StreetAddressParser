@@ -5,9 +5,8 @@
 
 use strict;
 use Lingua::EN::AddressParse;
-use Test::Simple tests => 16;
-
-
+use Test::Simple tests => 18;
+use Data::Dumper;
 
 my $input;
 
@@ -120,6 +119,44 @@ ok
         $comps{po_box_type} eq 'Private Boxes'
     ),
     "Australian PO Box"
+);
+
+$input = "UNIT 206 3 AVE OF THE AMERICAS NEWINGTON NSW 2127";
+$address->parse($input);
+%comps = $address->components;
+
+%comps = $address->components;
+ok
+(
+    (
+        $comps{property_identifier} eq '3' and
+        $comps{sub_property_type} eq 'Unit' and
+        $comps{sub_property_identifier} eq '206' and
+        $comps{street_name} eq 'Ave Of The Americas' and
+        $comps{suburb} eq 'Newington' and
+        $comps{subcountry} eq 'NSW' and
+        $comps{post_code} eq '2127'
+    ),
+    "Australian Avenue of the Americas address"
+);
+
+$input = "UNIT 206 3 AVE OF EUROPE NEWINGTON NSW 2127";
+$address->parse($input);
+%comps = $address->components;
+
+%comps = $address->components;
+ok
+(
+    (
+        $comps{property_identifier} eq '3' and
+        $comps{sub_property_type} eq 'Unit' and
+        $comps{sub_property_identifier} eq '206' and
+        $comps{street_name} eq 'Ave Of Europe' and
+        $comps{suburb} eq 'Newington' and
+        $comps{subcountry} eq 'NSW' and
+        $comps{post_code} eq '2127'
+    ),
+    "Australian Ave of Europe address"
 );
 
 
@@ -299,5 +336,3 @@ ok
     ),
     "sub property auto clean"
 );
-
-

@@ -540,7 +540,6 @@ sub parse
     $address = _assemble($address,$pre_cursor,$po_box_type,$level,$building);
     _validate($address);
 
-
     return($address,$address->{error});
 }
 
